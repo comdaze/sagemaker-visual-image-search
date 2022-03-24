@@ -7,7 +7,7 @@ Resources:
     Properties:
       InstanceType: ml.t3.medium
       RoleArn: !GetAtt Role.Arn
-      DefaultCodeRepository: https://github.com/comdaze/sagemaker-visual-image-search
+
 
   Role:
     Type: AWS::IAM::Role
