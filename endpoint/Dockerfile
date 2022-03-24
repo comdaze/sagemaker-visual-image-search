@@ -28,7 +28,7 @@ RUN apt-get -y update && apt-get install -y --no-install-recommends \
 COPY ./requirements.txt /opt/ml/code/
 
 # RUN pip config set global.index-url https://opentuna.cn/pypi/web/simple/
-RUN pip install -r /opt/ml/code/requirements.txt
+RUN pip install -r /opt/ml/code/requirements.txt -i https://opentuna.cn/pypi/web/simple
 
 ENV PATH="/opt/ml/code:${PATH}"
 
