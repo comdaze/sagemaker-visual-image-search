@@ -113,7 +113,7 @@ Outputs:
       - - 'https://'
         - !GetAtt 
           - s3BucketHosting
-          - Domain Name
+          - DomainName
     Description: Name of S3 bucket to hold website content
 
   SageMakerNotebookURL:
