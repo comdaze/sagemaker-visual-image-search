@@ -22,9 +22,28 @@
 ```
 git clone https://github.com/comdaze/sagemaker-visual-image-search.git
 ```
-2、采用cfn/initial_template_cn.yaml文件在Cloudformation服务中运行，创建初始化资源。
+2、采用cfn/initial_template_cn.yaml模版文件在Cloudformation服务中创建stack，自动初始化资源,可以在AWS图形化管理控制台操作：
 
-3、在Notebook实例的的jupterlab中打开[visual-image-search-gluoncv-cn.ipynb](./visual-image-search-gluoncv-cn.ipynb)，按照这个notebook继续执行。
+![start_cf](./pics/start_cf.png)
+
+或者可以采用aws cli
+```
+cd sagemaker-visual-image-search/cfn
+aws cloudformation create-stack --stack-name vis-search --template-body file://initial_template_cn.yaml --capabilities CAPABILITY_IAM --profile zhy
+```
+执行完毕后可以在输出看到SagemakerNotebookURL的地址
+
+![cf_outputs](./pics/cf_outputs.png)
+
+3、点击进入Notebook实例的的jupterlab，clone代码：
+
+![nb_git](./pics/nb_git.png)
+
+进入sagemaker-visual-image-search目录，打开[visual-image-search-gluoncv-cn.ipynb](./visual-image-search-gluoncv-cn.ipynb)，修改内核：
+
+![select_kernel](./pics/select_kernel.png)
+
+4、然后开始在[visual-image-search-gluoncv-cn.ipynb](./visual-image-search-gluoncv-cn.ipynb)继续执行。
 
 
 ## License
