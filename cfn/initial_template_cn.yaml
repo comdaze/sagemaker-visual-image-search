@@ -113,7 +113,7 @@ Outputs:
       - - 'https://'
         - !GetAtt 
           - s3BucketHosting
-      - - 's3.cn-northwest-1.amazonaws.com.cn'
+          - Domain Name
     Description: Name of S3 bucket to hold website content
 
   SageMakerNotebookURL:
