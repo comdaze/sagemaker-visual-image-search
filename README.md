@@ -39,7 +39,7 @@ aws cloudformation create-stack --stack-name vis-search --template-body file://i
 
 ![nb_git](./pics/nb_git.png)
 
-进入sagemaker-visual-image-search目录，打开[visual-image-search-gluoncv-cn.ipynb](./visual-image-search-gluoncv-cn.ipynb)，修改内核：
+进入sagemaker-visual-image-search目录，打开[visual-image-search-gluoncv-cn.ipynb](./visual-image-search-gluoncv-cn.ipynb)，修改内核为conda_mxnet_latest_p37：
 
 ![select_kernel](./pics/select_kernel.png)
 
