@@ -1,23 +1,25 @@
-## Visual image search
-This repository is part of AWS blog to create a visual search application using Amazon SageMaker and Amazon Elasticsearch
+## 可视化图像搜索Workshop
+这个Workshop是实现了端到端的一个可视化图像搜索应用程序。它主要使用使用Amazon SageMaker和Amazon Elasticsearch等组件。架构如下：
 
-## How does it work?
+![arch](./arch.png)
 
-We will use Fashion Images from feidegger, a zalandoresearch dataset as a reference image to generate a 2048 feature vector using a convolutional neural networks and gets stored into Amazon Elasticsearch KNN index
+这个workshop面向AWS中国区域部署，在Global部署请参考：
 
-![diagram](../master/ref.png)
+[aws-samples/amazon-sagemaker-visual-search](https://github.com/aws-samples/amazon-sagemaker-visual-search)
 
-When we present a new query image, it's computing the related feature vector from Amazon SageMaker hosted model and query Amazon Elasticsearch KNN index to find similar images
+## 如何工作?
 
-![diagram](../master/query.png)
+我们将使用feidegger (zalandoresearch数据集)的Fashion Images作为参考图像或者自定义数据集比如地形图，使用卷积神经网络生成2048个特征向量，并存储到Amazon Elasticsearch KNN索引中
 
-## Use Keras
+![diagram](./ref.png)
 
-Refer to [src](src) and [visual-image-search.ipynb](visual-image-search.ipynb)
+当我们提出一个新的查询图像时，它正在计算来自Amazon SageMaker托管模型的相关特征向量，并查询Amazon Elasticsearch KNN索引来找到类似的图像
+
+![diagram](./query.png)
 
 ## Use GluonCV
 
-Refer to [endpoint](endpoint) and [visual-image-search-gluoncv.ipynb](visual-image-search-gluoncv.ipynb), train script is [transfer_learning.ipynb](transfer_learning.ipynb)
+在AWS中国区域运行[visual-image-search-gluoncv-cn.ipynb](./visual-image-search-gluoncv-cn.ipynb), 训练脚本为[transfer_learning.ipynb](./transfer_learning.ipynb)
 
 ## License
 

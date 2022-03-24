@@ -47,6 +47,12 @@ Resources:
           
   s3BucketTraining:
     Type: AWS::S3::Bucket
+    Properties:
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls : false
+        BlockPublicPolicy : false
+        IgnorePublicAcls : false
+        RestrictPublicBuckets : false
 
   s3BucketHosting:
     Type: AWS::S3::Bucket
@@ -54,7 +60,11 @@ Resources:
       WebsiteConfiguration:
         IndexDocument: index.html
         ErrorDocument: error.html
-
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls : false
+        BlockPublicPolicy : false
+        IgnorePublicAcls : false
+        RestrictPublicBuckets : false
   Domain:
     Type: AWS::Elasticsearch::Domain
     Properties:
@@ -91,6 +101,11 @@ Outputs:
   s3BucketHostingBucketName:
     Description: S3 bucket name for frontend hosting
     Value: !Ref s3BucketHosting
+  WebsiteURL:
+    Value: !GetAtt 
+      - s3BucketHosting
+      - WebsiteURL
+    Description: URL for website hosted on S3
 
   S3BucketSecureURL:
     Value: !Join 
@@ -107,4 +122,4 @@ Outputs:
       - ''
       - - 'https://console.amazonaws.cn/sagemaker/home?region=cn-northwest-1#/notebook-instances/openNotebook/'
         - !GetAtt NotebookInstance.NotebookInstanceName
-        - '?view=classic'
+        - '?view=lab'
