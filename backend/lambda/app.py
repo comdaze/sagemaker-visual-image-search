@@ -1,6 +1,7 @@
 import base64
 import json
 from os import environ
+from PIL import Image
 
 import boto3
 import requests
@@ -8,6 +9,7 @@ from urllib.parse import urlparse
 from io import BytesIO
 
 from elasticsearch import Elasticsearch, RequestsHttpConnection
+
 from requests_aws4auth import AWS4Auth
 
 # Global variables that are reused
@@ -27,12 +29,12 @@ def get_features(sm_runtime_client, sagemaker_endpoint, img_bytes):
 
 
 def get_neighbors(features, es, k_neighbors=3):
-    idx_name = 'idx_zalando'
+    idx_name = 'idx_geo'
     res = es.search(
         request_timeout=30, index=idx_name,
         body={
             'size': k_neighbors,
-            'query': {'knn': {'zalando_img_vector': {'vector': features, 'k': k_neighbors}}}}
+            'query': {'knn': {'geo_img_vector': {'vector': features, 'k': k_neighbors}}}}
         )
     s3_uris = [res['hits']['hits'][x]['_source']['image'] for x in range(k_neighbors)]
 
@@ -89,13 +91,24 @@ def lambda_handler(event, context):
     sagemaker_endpoint = environ['SM_ENDPOINT']
 
     api_payload = json.loads(event['body'])
-    k = api_payload['k']
+    print("================")
+    print(api_payload)
+    k = api_payload["k"]
     if event['path'] == '/postURL':
-        image = download_file(api_payload['url'])
+        image_old = download_file(api_payload['url'])
     else:
         img_string = api_payload['base64img']
         print(img_string)
-        image = BytesIO(base64.b64decode(img_string))
+    
+        image_old = BytesIO(base64.b64decode(img_string))
+        
+        
+    new_img = Image.open(image_old).convert('RGB') 
+    img_byte = BytesIO()
+    new_img.save(img_byte, format='PNG') 
+    image = img_byte.getvalue()
+        
+        
 
     features = get_features(sm_runtime_client, sagemaker_endpoint, image)
     s3_uris_neighbors = get_neighbors(features, es, k_neighbors=k)
@@ -112,3 +125,4 @@ def lambda_handler(event, context):
             "images": s3_presigned_urls,
         }),
     }
+

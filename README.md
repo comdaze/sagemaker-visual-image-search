@@ -17,7 +17,9 @@
 
 ![diagram](./query.png)
 
-## Use GluonCV
+## 实验步骤
+
+
 
 在AWS中国区域运行[visual-image-search-gluoncv-cn.ipynb](./visual-image-search-gluoncv-cn.ipynb), 训练脚本为[transfer_learning.ipynb](./transfer_learning.ipynb)
 
