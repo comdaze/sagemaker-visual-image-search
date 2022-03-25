@@ -45,6 +45,9 @@ aws cloudformation create-stack --stack-name vis-search --template-body file://i
 
 4、然后开始在[visual-image-search-gluoncv-cn.ipynb](./visual-image-search-gluoncv-cn.ipynb)继续执行。
 
+5、最后部署完成后，浏览器打开Web应用，上传图片，获得相似的图片：
+
+![final_app](./pics/final_app.png)
 
 ## License
 
